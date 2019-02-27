@@ -21,7 +21,7 @@ public class StartupListener implements ServletContextListener{
         Logger.error("Démarrage application");
         IBlogDao blogDao = new MockBlogDao();
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setEmail("contact@aquasys.fr)");
+        utilisateur.setEmail("sean@contact.fr)");
         List<Blog> listOfBlogs = blogDao.getBlogs(utilisateur);
         System.out.println("nb blogs=" + listOfBlogs.size());
     }
