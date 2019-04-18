@@ -1,13 +1,19 @@
 package fr.epsi.seanProject.dao.mockImpl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import fr.epsi.seanProject.beans.Blog;
 import fr.epsi.seanProject.beans.Reponse;
+import fr.epsi.seanProject.beans.Statut;
 import fr.epsi.seanProject.beans.Utilisateur;
+import fr.epsi.seanProject.dao.DBConnection;
 import fr.epsi.seanProject.dao.IBlogDao;
 import fr.epsi.seanProject.dao.IStatutDao;
 import fr.epsi.seanProject.dao.IUtilisateurDao;
@@ -31,7 +37,10 @@ public class MockBlogDao implements IBlogDao {
 	@Override
 	public List<Blog> getBlogs(Utilisateur utilisateur) {
 		List<Blog> myBlogs = new ArrayList<Blog>();
+		List<Blog> blyat = getBlogs();
+		System.out.println(blyat.size());
 		for (Blog b : getBlogs()) {
+			
 			if (b.getCreateur().getEmail().equals(utilisateur.getEmail())) {
 				myBlogs.add(b);
 			} else if (b.getStatut().getId().intValue() == IStatutDao.PUBLIE) {
@@ -63,6 +72,7 @@ public class MockBlogDao implements IBlogDao {
 				blog.setDateModification(new java.sql.Date(new Date().getTime()));
 			}
 		}
+	
 	}
 
 	@Override
@@ -88,17 +98,29 @@ public class MockBlogDao implements IBlogDao {
 		}
 	}
 	
-	private List<Blog> getBlogs() {
+	private List<Blog> getBlogs() {	
 		if (listOfBlogs == null) {
 			listOfBlogs = new ArrayList<Blog>();
-			Blog blog = new Blog();
-			blog.setId(1);
-			blog.setTitre("First Blog");
-			blog.setDescription("My first blog");
-			blog.setDateCreation(new java.sql.Date(new Date().getTime()));
-			blog.setCreateur(utilisateurDao.getUtilisateur("contact@aquasys.fr"));
-			blog.setStatut(statutDao.getStatut(1));
-			listOfBlogs.add(blog);
+		}	
+		try {
+		Connection connection = DBConnection.getConnection();
+		PreparedStatement st= connection.prepareStatement("SELECT * FROM BLOG");
+		ResultSet rs = st.executeQuery();
+    
+    	while(rs.next()) {
+    		Blog blog = new Blog();
+    		blog.setId(rs.getInt("id"));
+    		blog.setTitre(rs.getString("titre"));
+    		blog.setDescription(rs.getString("description"));
+    		blog.setDateCreation(rs.getDate("date"));
+    		Utilisateur utilisateur = utilisateurDao.getUtilisateur(rs.getString("email"));
+    		blog.setCreateur(utilisateur);
+    		Statut statut = statutDao.getStatut(rs.getInt("statut"));
+    		blog.setStatut(statut);
+    		listOfBlogs.add(blog);
+    	}
+		}catch(SQLException e) {
+			
 		}
 		return listOfBlogs;
 	}

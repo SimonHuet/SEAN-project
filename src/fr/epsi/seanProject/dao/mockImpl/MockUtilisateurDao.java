@@ -1,11 +1,16 @@
 package fr.epsi.seanProject.dao.mockImpl;
 
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import fr.epsi.seanProject.beans.Utilisateur;
+import fr.epsi.seanProject.dao.DBConnection;
 import fr.epsi.seanProject.dao.IUtilisateurDao;
 
 public class MockUtilisateurDao implements IUtilisateurDao {
@@ -49,20 +54,26 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 	private List<Utilisateur> getListOfUtilisateur() {
 		if (listOfUtilisateurs == null) {
 			listOfUtilisateurs = new ArrayList<Utilisateur>();
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setEmail("contact@aquasys.fr");
-			utilisateur.setNom("ADMIN");
-			utilisateur.setAdmin(true);
-			utilisateur.setDateCreation(new java.sql.Date(new Date().getTime()));
-			listOfUtilisateurs.add(utilisateur);
-			
-			utilisateur = new Utilisateur();
-			utilisateur.setEmail("test@aquasys.fr");
-			utilisateur.setNom("TEST");
-			utilisateur.setAdmin(false);
-			utilisateur.setDateCreation(new java.sql.Date(new Date().getTime()));
-			listOfUtilisateurs.add(utilisateur);
-		}
+		}	
+			try {
+	        	Connection connection = DBConnection.getConnection();
+	        	Statement con = connection.createStatement();
+	        	
+	        	ResultSet rs = con.executeQuery("select * from users");
+	        	while(rs.next()) {
+	        		Utilisateur utilisateur = new Utilisateur();
+	        		utilisateur.setEmail(rs.getString("email"));
+	        		utilisateur.setNom(rs.getString("nom"));
+	        		utilisateur.setAdmin(rs.getBoolean("is_admin"));
+	        		utilisateur.setDateCreation(rs.getDate("date_creation"));
+					utilisateur.setPassord(rs.getString("password"));
+	        	}
+	        	
+	        }
+	        catch(Exception e){
+	        	e.printStackTrace();
+	        }
+		
 		return listOfUtilisateurs;
 	}
 }

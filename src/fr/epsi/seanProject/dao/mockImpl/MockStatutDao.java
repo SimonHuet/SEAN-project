@@ -1,9 +1,14 @@
 package fr.epsi.seanProject.dao.mockImpl;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.epsi.seanProject.beans.Statut;
+import fr.epsi.seanProject.dao.DBConnection;
 import fr.epsi.seanProject.dao.IStatutDao;
 
 public class MockStatutDao implements IStatutDao {
@@ -27,27 +32,24 @@ public class MockStatutDao implements IStatutDao {
 	private List<Statut> getPrivateListOfStatuts() {
 		if (listOfStatuts == null) {
 			listOfStatuts = new ArrayList<Statut>();
-			Statut statut = new Statut();
-			statut.setId(1);
-			statut.setDescription("Temporaire");
-			listOfStatuts.add(statut);
-			
-			statut = new Statut();
-			statut.setId(2);
-			statut.setDescription("Publié");
-			listOfStatuts.add(statut);
-			
-			statut = new Statut();
-			statut.setId(3);
-			statut.setDescription("Archivé");
-			listOfStatuts.add(statut);
-			
-			statut = new Statut();
-			statut.setId(4);
-			statut.setDescription("Annulé");
-			listOfStatuts.add(statut);
 			
 		}
+		try {
+		Connection connection = DBConnection.getConnection();
+    	Statement con = connection.createStatement();
+    	
+    	ResultSet rs = con.executeQuery("select * from statut");
+    	while(rs.next()) {
+		
+			Statut statut = new Statut();
+			statut.setId(rs.getInt("id"));
+			statut.setDescription(rs.getString("title"));
+			listOfStatuts.add(statut);
+    	}
+		}catch(SQLException e) {
+			
+		}
+			
 		return listOfStatuts;
 	}
 }

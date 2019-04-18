@@ -3,7 +3,9 @@ package fr.epsi.seanProject.beans;
 import java.sql.Date;
 import java.util.List;
 
-public class Blog {
+import fr.epsi.seanProject.mbeans.BlogMXBean;
+
+public class Blog implements BlogMXBean {
 
 	private Integer id;
 	private String titre;
@@ -61,6 +63,16 @@ public class Blog {
 	}
 	public void setStatut(Statut statut) {
 		this.statut = statut;
+	}
+	@Override
+	public String getNom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getNbPost() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
