@@ -37,15 +37,13 @@ public class MockBlogDao implements IBlogDao {
 	@Override
 	public List<Blog> getBlogs(Utilisateur utilisateur) {
 		List<Blog> myBlogs = new ArrayList<Blog>();
-		List<Blog> blyat = getBlogs();
-		System.out.println(blyat.size());
 		for (Blog b : getBlogs()) {
-			
-			if (b.getCreateur().getEmail().equals(utilisateur.getEmail())) {
-				myBlogs.add(b);
+			myBlogs.add(b);
+			/*if (b.getCreateur().getEmail().equals(utilisateur.getEmail())) {
+				
 			} else if (b.getStatut().getId().intValue() == IStatutDao.PUBLIE) {
 				myBlogs.add(b);
-			}
+			}*/
 		}
 		return myBlogs;
 	}
@@ -112,17 +110,22 @@ public class MockBlogDao implements IBlogDao {
     		blog.setId(rs.getInt("id"));
     		blog.setTitre(rs.getString("titre"));
     		blog.setDescription(rs.getString("description"));
-    		blog.setDateCreation(rs.getDate("date"));
+    		blog.setDateCreation(rs.getDate("date_creation"));
+    		blog.setDateModification(rs.getDate("date_modification"));
     		Utilisateur utilisateur = utilisateurDao.getUtilisateur(rs.getString("email"));
     		blog.setCreateur(utilisateur);
     		Statut statut = statutDao.getStatut(rs.getInt("statut"));
     		blog.setStatut(statut);
+    		List<Reponse> listOfReponses = new ArrayList<Reponse>();
+    		blog.setListOfReponses(listOfReponses);
     		listOfBlogs.add(blog);
+    		
     	}
 		}catch(SQLException e) {
-			
+			System.out.println(e);
+
 		}
 		return listOfBlogs;
+		
 	}
-
 }
