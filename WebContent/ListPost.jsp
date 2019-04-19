@@ -10,6 +10,7 @@
 <body>
   <% 
   List<Blog> list = (List<Blog>)request.getAttribute("list"); 
+  System.out.println(list);
   for(Blog var : list ) { %>
   		<a  href="/SEAN/BlogServlet?post=<%= var.getId() %>">Numero:<%= var.getTitre() %> <%= var.getDescription() %> </a>
   <% } %> 

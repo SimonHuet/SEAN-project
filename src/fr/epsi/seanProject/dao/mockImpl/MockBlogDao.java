@@ -38,12 +38,13 @@ public class MockBlogDao implements IBlogDao {
 	public List<Blog> getBlogs(Utilisateur utilisateur) {
 		List<Blog> myBlogs = new ArrayList<Blog>();
 		for (Blog b : getBlogs()) {
-			myBlogs.add(b);
-			/*if (b.getCreateur().getEmail().equals(utilisateur.getEmail())) {
-				
-			} else if (b.getStatut().getId().intValue() == IStatutDao.PUBLIE) {
-				myBlogs.add(b);
-			}*/
+			if(b.getCreateur() != null) {
+				if (b.getCreateur().getEmail().equals(utilisateur.getEmail())) {
+					myBlogs.add(b);
+				} else if (b.getStatut().getId().intValue() == IStatutDao.PUBLIE) {
+					myBlogs.add(b);
+				}
+			}
 		}
 		return myBlogs;
 	}
@@ -75,57 +76,88 @@ public class MockBlogDao implements IBlogDao {
 
 	@Override
 	public void deleteBlog(Blog blog) throws SQLException {
-		for (Blog b : getBlogs()) {
-			if (b.getId().intValue() == blog.getId().intValue()) {
-				getBlogs().remove(b);
-				return;
-			}
+		try {
+			Connection connection = DBConnection.getConnection();
+			PreparedStatement st = connection.prepareStatement("DELETE FROM BLOG_COMMENTAIRES WHERE id_blog=?");
+			PreparedStatement stBlog= connection.prepareStatement("DELETE FROM BLOG WHERE id=?");
+			st.setInt(1, blog.getId());
+			stBlog.setInt(1, blog.getId());
+			st.executeQuery();
+			stBlog.executeQuery();
+		}catch(Exception e ) {
+			e.printStackTrace();
 		}
 	}
+	
 
 	@Override
 	public void addReponse(Blog blog, Reponse reponse) throws SQLException {
-		for (Blog b : getBlogs()) {
-			if (b.getId().intValue() == blog.getId().intValue()) {
-				if (b.getListOfReponses() == null) {
-					b.setListOfReponses(new ArrayList<Reponse>());
-				}
-				b.getListOfReponses().add(reponse);
-				return;
-			}
+		try {
+			Connection connection = DBConnection.getConnection();
+			PreparedStatement st = connection.prepareStatement("INSERT INTO BLOG(TITRE,DESCRIPTION,EMAIL,DATE_CREATION,DATE_MODIFICATION, STATUT)" +
+					"VALUES ( ?, ?, ?, ?, ?,? )");
+			st.setString(1, blog.getTitre());
+			st.setString(2, blog.getDescription() );
+			st.setString(3, blog.getCreateur().getEmail());
+			st.executeQuery();
+		}catch(Exception e ) {
+			e.printStackTrace();
 		}
 	}
 	
 	private List<Blog> getBlogs() {	
-		if (listOfBlogs == null) {
-			listOfBlogs = new ArrayList<Blog>();
-		}	
+		listOfBlogs = new ArrayList<Blog>();
+		
 		try {
-		Connection connection = DBConnection.getConnection();
-		PreparedStatement st= connection.prepareStatement("SELECT * FROM BLOG");
-		ResultSet rs = st.executeQuery();
+			Connection connection = DBConnection.getConnection();
+			PreparedStatement st= connection.prepareStatement("SELECT * FROM BLOG");
+			ResultSet rs = st.executeQuery();
     
-    	while(rs.next()) {
-    		Blog blog = new Blog();
-    		blog.setId(rs.getInt("id"));
-    		blog.setTitre(rs.getString("titre"));
-    		blog.setDescription(rs.getString("description"));
-    		blog.setDateCreation(rs.getDate("date_creation"));
-    		blog.setDateModification(rs.getDate("date_modification"));
-    		Utilisateur utilisateur = utilisateurDao.getUtilisateur(rs.getString("email"));
-    		blog.setCreateur(utilisateur);
-    		Statut statut = statutDao.getStatut(rs.getInt("statut"));
-    		blog.setStatut(statut);
-    		List<Reponse> listOfReponses = new ArrayList<Reponse>();
-    		blog.setListOfReponses(listOfReponses);
-    		listOfBlogs.add(blog);
-    		
-    	}
+			while(rs.next()) {
+				Blog blog = new Blog();
+				blog.setId(rs.getInt("id"));
+				blog.setTitre(rs.getString("titre"));
+				blog.setDescription(rs.getString("description"));
+				blog.setDateCreation(rs.getDate("date_creation"));
+				blog.setDateModification(rs.getDate("date_modification"));
+				Utilisateur utilisateur = utilisateurDao.getUtilisateur(rs.getString("email"));
+				blog.setCreateur(utilisateur);
+				Statut statut = statutDao.getStatut(rs.getInt("statut"));
+				blog.setStatut(statut);
+				List<Reponse> listOfReponses = new ArrayList<Reponse>();
+				listOfReponses = getBlogPosts(blog);
+				blog.setListOfReponses(listOfReponses);
+				listOfBlogs.add(blog);
+			}
 		}catch(SQLException e) {
 			System.out.println(e);
-
 		}
 		return listOfBlogs;
+	}
+	
+	public List<Reponse> getBlogPosts(Blog blog) {
+		List<Reponse> listOfReponses = new ArrayList<Reponse>();
+		try {
+			Connection connection = DBConnection.getConnection();
+			PreparedStatement st= connection.prepareStatement("SELECT * FROM BLOG_COMMENTAIRES WHERE id_blog=?");
+			st.setInt(1, blog.getId() );
+			
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				Reponse reponse = new Reponse();
+				reponse.setBlog(blog);
+				Utilisateur utilisateur = utilisateurDao.getUtilisateur(rs.getString("email"));
+	    		reponse.setBlogger(utilisateur);
+	    		reponse.setCommentaire(rs.getString("commentaire"));
+	    		reponse.setPublication(rs.getDate("date_creation"));
+	    		listOfReponses.add(reponse);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+		return listOfReponses;
 	}
 }

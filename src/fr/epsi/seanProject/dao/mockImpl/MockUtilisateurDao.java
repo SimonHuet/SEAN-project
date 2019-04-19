@@ -19,9 +19,12 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 	
 	@Override
 	public Utilisateur getUtilisateur(String email) {
+		if(email != null ) {
 		for (Utilisateur u : getListOfUtilisateur()) {
-			if (u.getEmail().equals(email))
-			return u;
+			if (u.getEmail().equals(email)) {
+				return u;
+			}
+		}
 		}
 		return null;
 	}
@@ -42,8 +45,16 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 	}
 
 	@Override
-	public void deleteUtilisateur(Utilisateur utilisateur) throws SQLException {
+	public void deleteUtilisateur(Utilisateur utilisateur) {
 		for (Utilisateur u : getListOfUtilisateur()) {
+			if(u.getAdmin().equals(true)) {
+				try {
+					throw new Exception("cannot delete admin");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			if (u.getEmail().equals(utilisateur.getEmail())) {
 				getListOfUtilisateur().remove(u);
 				return;
@@ -52,9 +63,8 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 	}
 
 	private List<Utilisateur> getListOfUtilisateur() {
-		if (listOfUtilisateurs == null) {
-			listOfUtilisateurs = new ArrayList<Utilisateur>();
-		}	
+		listOfUtilisateurs = new ArrayList<Utilisateur>();
+		
 			try {
 	        	Connection connection = DBConnection.getConnection();
 	        	Statement con = connection.createStatement();

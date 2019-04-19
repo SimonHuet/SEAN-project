@@ -2,6 +2,7 @@ package fr.epsi.seanProject.servlets;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,9 @@ import org.apache.logging.log4j.Logger;
 import fr.epsi.seanProject.beans.Blog;
 import fr.epsi.seanProject.beans.Reponse;
 import fr.epsi.seanProject.beans.Utilisateur;
+import fr.epsi.seanProject.dao.mockImpl.MockBlogDao;
+
+
 
 /**
  * Servlet implementation class CreatePostServlet
@@ -49,6 +53,7 @@ public class CreatePostServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		MockBlogDao BlogDao = new MockBlogDao();
 		Blog newBlog = new Blog();
 		newBlog.setTitre(request.getParameter("title" ));
 		newBlog.setDescription(request.getParameter("textarea"));
@@ -60,6 +65,17 @@ public class CreatePostServlet extends HttpServlet {
 		List<Reponse> reps = new ArrayList();
 		newBlog.setListOfReponses(reps);
 		request.setAttribute("Blog", newBlog);
+		if(newBlog != null)
+		{
+			int newId = 0;
+			try {
+				newId = BlogDao.createBlog(newBlog);
+				newBlog.setId(newId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		request.getRequestDispatcher("/BlogServlet?post="+newBlog.getId()).forward(request, response);
 	}
 
