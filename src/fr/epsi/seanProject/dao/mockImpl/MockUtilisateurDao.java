@@ -2,6 +2,7 @@ package fr.epsi.seanProject.dao.mockImpl;
 
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
@@ -31,35 +32,42 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 
 	@Override
 	public void createUtilisateur(Utilisateur utilisateur) throws SQLException {
-		getListOfUtilisateur().add(utilisateur);
+		Connection connection = DBConnection.getConnection();
+    	PreparedStatement st = connection.prepareStatement(
+    			"INSERT INTO USERS (email, nom, date_creation, password , is_admin) values (?,?,?,?,?)");
+    	
+    	st.setString( 1, utilisateur.getEmail() );
+		st.setString( 2, utilisateur.getNom());
+		st.setDate( 3, utilisateur.getDateCreation());
+		st.setString( 4, utilisateur.getPassord() );
+		st.setBoolean( 5, utilisateur.getAdmin() );
+		st.executeUpdate();
 	}
 
 	@Override
 	public void updateUtilisateur(Utilisateur utilisateur) throws SQLException {
-		for (Utilisateur u : getListOfUtilisateur()) {
-			if (u.getEmail().equals(utilisateur.getEmail())) {
-				u.setAdmin(utilisateur.getAdmin());
-				u.setNom(utilisateur.getNom());
-			}
-		}
+		
+		Connection connection = DBConnection.getConnection();
+    	PreparedStatement st = connection.prepareStatement(
+    			"UPDATE USERS SET email=? , nom=? , date_creation=? , password=? , is_admin=? WHERE email=?");
+    	
+    	st.setString( 1, utilisateur.getEmail() );
+		st.setString( 2, utilisateur.getNom());
+		st.setDate( 3, utilisateur.getDateCreation());
+		st.setString( 4, utilisateur.getPassord() );
+		st.setBoolean( 5, utilisateur.getAdmin() );
+    	st.setString( 6, utilisateur.getEmail() );
+		st.executeUpdate();
 	}
 
 	@Override
-	public void deleteUtilisateur(Utilisateur utilisateur) {
-		for (Utilisateur u : getListOfUtilisateur()) {
-			if(u.getAdmin().equals(true)) {
-				try {
-					throw new Exception("cannot delete admin");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if (u.getEmail().equals(utilisateur.getEmail())) {
-				getListOfUtilisateur().remove(u);
-				return;
-			}
-		}
+	public void deleteUtilisateur(Utilisateur utilisateur) throws SQLException {
+		
+		Connection connection = DBConnection.getConnection();
+		PreparedStatement st = connection.prepareStatement(
+				"DELETE FROM USERS WHERE email=? AND is_admin=false");
+		
+		st.setString( 1, utilisateur.getEmail() );
 	}
 
 	private List<Utilisateur> getListOfUtilisateur() {
