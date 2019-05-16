@@ -1,16 +1,216 @@
+/*C17*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C16*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C18*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C19*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C20*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C21*/SET SCHEMA PUBLIC
+INSERT INTO STATUT VALUES(3,'Archiv\u00e9e')
+COMMIT
+DISCONNECT
+/*C22*/SET SCHEMA PUBLIC
+INSERT INTO STATUT VALUES(4,'Annul\u00e9e')
+COMMIT
+/*C23*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C24*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C25*/SET SCHEMA PUBLIC
+INSERT INTO BLOG_COMMENTAIRES VALUES(1,'MOi aussi j''aime le poulet','contact@aquasys.fr','2019-05-16')
+COMMIT
+INSERT INTO BLOG_COMMENTAIRES VALUES(1,'MOi aussi j''aime le poulet','contact@aquasys.fr','2019-05-16')
+COMMIT
 DISCONNECT
 /*C26*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C27*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C22*/DELETE FROM BLOG WHERE ID=1
+DELETE FROM BLOG WHERE ID=4
+DELETE FROM BLOG WHERE ID=5
+DELETE FROM BLOG WHERE ID=6
+DELETE FROM BLOG WHERE ID=7
+DELETE FROM BLOG WHERE ID=8
+DELETE FROM BLOG WHERE ID=9
+DELETE FROM BLOG WHERE ID=10
+DELETE FROM BLOG WHERE ID=11
+DELETE FROM BLOG WHERE ID=12
+DELETE FROM BLOG WHERE ID=13
+DELETE FROM BLOG WHERE ID=14
+DELETE FROM BLOG WHERE ID=15
+DELETE FROM BLOG WHERE ID=16
+DELETE FROM BLOG WHERE ID=17
+DELETE FROM BLOG WHERE ID=18
+DELETE FROM BLOG WHERE ID=19
+DELETE FROM BLOG WHERE ID=20
+DELETE FROM BLOG WHERE ID=21
+DELETE FROM BLOG WHERE ID=22
+DELETE FROM BLOG WHERE ID=23
+DELETE FROM BLOG WHERE ID=24
+DELETE FROM BLOG WHERE ID=25
+DELETE FROM BLOG WHERE ID=26
+DELETE FROM BLOG WHERE ID=27
+DELETE FROM BLOG WHERE ID=28
+DELETE FROM BLOG WHERE ID=29
+INSERT INTO BLOG VALUES(1,'Blog Num\u00e9ro 1 : le KFC, une religion ?','hmmmmm... le poulet #PICHON','contact@aquasys.fr','2019-04-17','2019-05-15',1)
+INSERT INTO BLOG VALUES(4,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(5,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(6,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(7,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(8,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(9,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(10,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(11,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(12,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(13,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(14,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(15,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(16,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(17,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(18,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(19,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(20,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(21,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(22,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(23,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(24,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(25,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(26,NULL,' Entrez le corps du post \u00a7!!!!!!!!\u00a7 <script>alert("C''est un peu un coup de foutre pour moi !")</script> ','contact@aquasys.fr','2019-05-14',NULL,1)
+INSERT INTO BLOG VALUES(27,NULL,' Entrez le corps du post \u00a7!!!!!!!!\u00a7 <script>alert("C''est un peu un coup de foutre pour moi !")</script> ','contact@aquasys.fr','2019-05-15',NULL,1)
+INSERT INTO BLOG VALUES(28,NULL,NULL,'contact@aquasys.fr','2019-05-15',NULL,1)
+INSERT INTO BLOG VALUES(29,NULL,NULL,'contact@aquasys.fr','2019-05-15',NULL,1)
+COMMIT
 /*C28*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C22*/DELETE FROM BLOG WHERE ID=1
+DELETE FROM BLOG WHERE ID=4
+DELETE FROM BLOG WHERE ID=5
+DELETE FROM BLOG WHERE ID=6
+DELETE FROM BLOG WHERE ID=7
+DELETE FROM BLOG WHERE ID=8
+DELETE FROM BLOG WHERE ID=9
+DELETE FROM BLOG WHERE ID=10
+DELETE FROM BLOG WHERE ID=11
+DELETE FROM BLOG WHERE ID=12
+DELETE FROM BLOG WHERE ID=13
+DELETE FROM BLOG WHERE ID=14
+DELETE FROM BLOG WHERE ID=15
+DELETE FROM BLOG WHERE ID=16
+DELETE FROM BLOG WHERE ID=17
+DELETE FROM BLOG WHERE ID=18
+DELETE FROM BLOG WHERE ID=19
+DELETE FROM BLOG WHERE ID=20
+DELETE FROM BLOG WHERE ID=21
+DELETE FROM BLOG WHERE ID=22
+DELETE FROM BLOG WHERE ID=23
+DELETE FROM BLOG WHERE ID=24
+DELETE FROM BLOG WHERE ID=25
+DELETE FROM BLOG WHERE ID=26
+DELETE FROM BLOG WHERE ID=27
+DELETE FROM BLOG WHERE ID=28
+DELETE FROM BLOG WHERE ID=29
+INSERT INTO BLOG VALUES(1,'Blog Num\u00e9ro 1 : le KFC, une religion ?','hmmmmm... le poulet #PICHON','contact@aquasys.fr','2019-04-17','2019-05-15',2)
+INSERT INTO BLOG VALUES(4,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(5,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(6,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(7,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(8,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(9,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(10,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(11,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(12,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(13,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(14,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(15,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(16,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(17,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(18,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(19,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(20,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(21,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(22,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(23,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(24,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(25,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',2)
+INSERT INTO BLOG VALUES(26,NULL,' Entrez le corps du post \u00a7!!!!!!!!\u00a7 <script>alert("C''est un peu un coup de foutre pour moi !")</script> ','contact@aquasys.fr','2019-05-14',NULL,2)
+INSERT INTO BLOG VALUES(27,NULL,' Entrez le corps du post \u00a7!!!!!!!!\u00a7 <script>alert("C''est un peu un coup de foutre pour moi !")</script> ','contact@aquasys.fr','2019-05-15',NULL,2)
+INSERT INTO BLOG VALUES(28,NULL,NULL,'contact@aquasys.fr','2019-05-15',NULL,2)
+INSERT INTO BLOG VALUES(29,NULL,NULL,'contact@aquasys.fr','2019-05-15',NULL,2)
+COMMIT
 /*C29*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C22*/DELETE FROM BLOG WHERE ID=1
+DELETE FROM BLOG WHERE ID=4
+DELETE FROM BLOG WHERE ID=5
+DELETE FROM BLOG WHERE ID=6
+DELETE FROM BLOG WHERE ID=7
+DELETE FROM BLOG WHERE ID=8
+DELETE FROM BLOG WHERE ID=9
+DELETE FROM BLOG WHERE ID=10
+DELETE FROM BLOG WHERE ID=11
+DELETE FROM BLOG WHERE ID=12
+DELETE FROM BLOG WHERE ID=13
+DELETE FROM BLOG WHERE ID=14
+DELETE FROM BLOG WHERE ID=15
+DELETE FROM BLOG WHERE ID=16
+DELETE FROM BLOG WHERE ID=17
+DELETE FROM BLOG WHERE ID=18
+DELETE FROM BLOG WHERE ID=19
+DELETE FROM BLOG WHERE ID=20
+DELETE FROM BLOG WHERE ID=21
+DELETE FROM BLOG WHERE ID=22
+DELETE FROM BLOG WHERE ID=23
+DELETE FROM BLOG WHERE ID=24
+DELETE FROM BLOG WHERE ID=25
+DELETE FROM BLOG WHERE ID=26
+DELETE FROM BLOG WHERE ID=27
+DELETE FROM BLOG WHERE ID=28
+DELETE FROM BLOG WHERE ID=29
+INSERT INTO BLOG VALUES(1,'Blog Num\u00e9ro 1 : le KFC, une religion ?','hmmmmm... le poulet #PICHON','contact@aquasys.fr','2019-04-17','2019-05-15',1)
+INSERT INTO BLOG VALUES(4,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(5,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(6,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(7,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(8,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(9,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(10,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(11,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(12,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(13,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(14,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(15,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(16,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(17,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(18,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(19,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(20,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(21,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(22,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(23,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(24,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(25,'blog du blyat','contact@aquasys.fr','contact@aquasys.fr','2019-04-17','2019-04-17',1)
+INSERT INTO BLOG VALUES(26,NULL,' Entrez le corps du post \u00a7!!!!!!!!\u00a7 <script>alert("C''est un peu un coup de foutre pour moi !")</script> ','contact@aquasys.fr','2019-05-14',NULL,1)
+INSERT INTO BLOG VALUES(27,NULL,' Entrez le corps du post \u00a7!!!!!!!!\u00a7 <script>alert("C''est un peu un coup de foutre pour moi !")</script> ','contact@aquasys.fr','2019-05-15',NULL,1)
+INSERT INTO BLOG VALUES(28,NULL,NULL,'contact@aquasys.fr','2019-05-15',NULL,1)
+INSERT INTO BLOG VALUES(29,NULL,NULL,'contact@aquasys.fr','2019-05-15',NULL,1)
+COMMIT
 /*C30*/SET SCHEMA PUBLIC
+INSERT INTO BLOG_COMMENTAIRES VALUES(6,NULL,'contact@aquasys.fr','2019-05-16')
+COMMIT
+INSERT INTO BLOG_COMMENTAIRES VALUES(6,NULL,'contact@aquasys.fr','2019-05-16')
+COMMIT
+INSERT INTO BLOG_COMMENTAIRES VALUES(6,NULL,'contact@aquasys.fr','2019-05-16')
+COMMIT
+INSERT INTO BLOG_COMMENTAIRES VALUES(6,NULL,'contact@aquasys.fr','2019-05-16')
+COMMIT
+INSERT INTO BLOG_COMMENTAIRES VALUES(6,NULL,'contact@aquasys.fr','2019-05-16')
+COMMIT
+INSERT INTO BLOG_COMMENTAIRES VALUES(6,NULL,'contact@aquasys.fr','2019-05-16')
+COMMIT
 DISCONNECT
 /*C31*/SET SCHEMA PUBLIC
 DISCONNECT
@@ -20,26 +220,18 @@ DISCONNECT
 DISCONNECT
 /*C34*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C36*/SET SCHEMA PUBLIC
-DISCONNECT
 /*C35*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C36*/SET SCHEMA PUBLIC
+DISCONNECT
 /*C37*/SET SCHEMA PUBLIC
-set schema PUBLIC
+DISCONNECT
 /*C38*/SET SCHEMA PUBLIC
-set schema PUBLIC
-ALTER TABLE BLOG_COMMENTAIRES ADD id_blog int NULL
 DISCONNECT
 /*C39*/SET SCHEMA PUBLIC
+DELETE FROM BLOG WHERE ID=6
+COMMIT
 DISCONNECT
 /*C40*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C41*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C43*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C37*/DISCONNECT
-/*C42*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C44*/SET SCHEMA PUBLIC
-DISCONNECT
+DELETE FROM BLOG WHERE ID=26
+COMMIT

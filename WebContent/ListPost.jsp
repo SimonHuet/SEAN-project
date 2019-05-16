@@ -10,13 +10,12 @@
 <body>
   <% 
   List<Blog> list = (List<Blog>)request.getAttribute("list"); 
-  System.out.println(list);
   for(Blog var : list ) { %>
-  		<a  href="/SEAN/BlogServlet?post=<%= var.getId() %>">Numero:<%= var.getTitre() %> <%= var.getDescription() %> </a>
-  <% } %> 
-  
-  <form action="/SEAN/CreatePostServlet">
-    <input type="submit" value="Create" />
-</form>
+  		<a  href="/SEAN/BlogServlet?post=<%= var.getId() %>"><%= var.getTitre() %> <%= var.getDescription() %> </a><br>
+  <% } %>
+
+	<form action="/SEAN/CreatePostServlet">
+		<input type="submit" value="Create" />
+	</form>
 </body>
 </html>

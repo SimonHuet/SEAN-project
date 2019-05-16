@@ -3,6 +3,8 @@ package fr.epsi.seanProject.beans;
 import java.sql.Date;
 import java.util.List;
 
+import fr.epsi.seanProject.dao.IBlogDao;
+import fr.epsi.seanProject.dao.mockImpl.MockBlogDao;
 import fr.epsi.seanProject.mbeans.BlogMXBean;
 
 public class Blog implements BlogMXBean {
@@ -72,7 +74,9 @@ public class Blog implements BlogMXBean {
 	@Override
 	public int getNbPost() {
 		// TODO Auto-generated method stub
-		return 0;
+		IBlogDao blogDao = new MockBlogDao();
+		int val = blogDao.getBlogs().size();
+		return val;
 	}
 	
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method="post" action="Connect">
+<form method="post">
             <fieldset>
                 <legend>Connexion</legend>
                 <p>Vous pouvez vous connecter via ce formulaire.</p>
@@ -26,5 +26,10 @@
             </fieldset>
             
         </form>
+        
+       <form action="/SEAN/CreateUserServlet">
+       <p> Pas de compte ?  Inscrivez vous ici:</p>
+		<input type="submit" value="Create" />
+	</form>
 </body>
 </html>

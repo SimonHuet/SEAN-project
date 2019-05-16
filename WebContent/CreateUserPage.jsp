@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Create user </title>
 </head>
 <body>
 	<form method="post">
 		<h1>Nom</h1>
 		<input value="" name="nom" placeholder="nom">
-		<h1>mél</h1>
+		<h1>mail</h1>
 		<input value="" name="email" placeholder="mél">
 		<h1>Mot de Passe</h1>
 		<input value="" name="password" placeholder="mot de passe" type="password">

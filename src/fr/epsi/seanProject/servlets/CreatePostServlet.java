@@ -17,10 +17,10 @@ import org.apache.logging.log4j.Logger;
 
 import fr.epsi.seanProject.beans.Blog;
 import fr.epsi.seanProject.beans.Reponse;
+import fr.epsi.seanProject.beans.Statut;
 import fr.epsi.seanProject.beans.Utilisateur;
+import fr.epsi.seanProject.dao.IBlogDao;
 import fr.epsi.seanProject.dao.mockImpl.MockBlogDao;
-
-
 
 /**
  * Servlet implementation class CreatePostServlet
@@ -29,6 +29,7 @@ import fr.epsi.seanProject.dao.mockImpl.MockBlogDao;
 public class CreatePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LogManager.getLogger(CreatePostServlet.class);
+	IBlogDao BlogDao = new MockBlogDao();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,29 +54,27 @@ public class CreatePostServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MockBlogDao BlogDao = new MockBlogDao();
 		Blog newBlog = new Blog();
 		newBlog.setTitre(request.getParameter("title" ));
 		newBlog.setDescription(request.getParameter("textarea"));
 		newBlog.setDateCreation(new Date(new java.util.Date().getTime()));
-		newBlog.setId(123456789);
 		Utilisateur createur = new Utilisateur();
 		createur.setEmail("blyat@gmail.com");
 		newBlog.setCreateur(createur);
 		List<Reponse> reps = new ArrayList();
 		newBlog.setListOfReponses(reps);
-		request.setAttribute("Blog", newBlog);
-		if(newBlog != null)
-		{
-			int newId = 0;
-			try {
-				newId = BlogDao.createBlog(newBlog);
-				newBlog.setId(newId);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		Statut st = new Statut();
+		st.setDescription("Publiée");
+		st.setId(1);
+		newBlog.setStatut(st);
+		try {
+			int id = BlogDao.createBlog(newBlog);
+			newBlog.setId(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		request.setAttribute("Blog", newBlog);
 		request.getRequestDispatcher("/BlogServlet?post="+newBlog.getId()).forward(request, response);
 	}
 

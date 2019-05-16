@@ -6,17 +6,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import fr.epsi.seanProject.beans.Utilisateur;
+import fr.epsi.seanProject.dao.IUtilisateurDao;
+import fr.epsi.seanProject.dao.mockImpl.MockUtilisateurDao;
+
 /**
  * Servlet implementation class ConnectServlet
  */
-@WebServlet("/Connect")
+@WebServlet("/")
 public class ConnectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LogManager.getLogger(ConnectServlet.class);
+	IUtilisateurDao utilisateurDao = new MockUtilisateurDao();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,6 +39,7 @@ public class ConnectServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		logger.info("Entering ConnectServlet");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("connectionPage.jsp").forward(request, response);
 	}
 
 	/**
@@ -40,18 +47,20 @@ public class ConnectServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-        String password= request.getParameter("FORM_PASSWORD" );
-        String name = request.getParameter("FORM_NAME");
+        String password= request.getParameter("password" );
+        String name = request.getParameter("name");
 		
         //doGet(request, response);
-
-
-            if(isPasswordValid( password )) {
-            	System.out.println(password);
-            }
-            if(isNameValid( name )){
-            	
-            } 
+        Utilisateur user  = utilisateurDao.getUtilisateur(name);
+        if(user.getPassord().equals(password)) {
+            
+    		HttpSession session = request.getSession();
+    		session.setAttribute("utilisateur", user);
+    		request.getRequestDispatcher("ListPostServlet").forward(request, response);
+        }
+        else {
+        	response.sendRedirect("Error.jsp");
+        }
      
     }
 

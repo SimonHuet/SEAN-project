@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Error</title>
 </head>
 <body>
-Mon appli
-<br>
-	<% out.println("Bonjour"); %>
+	<p>You try to perform a forbidden action !</p>
 </body>
 </html>

@@ -2,6 +2,7 @@ package fr.epsi.seanProject.servlets;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
@@ -18,6 +19,8 @@ import org.apache.logging.log4j.Logger;
 import fr.epsi.seanProject.beans.Blog;
 import fr.epsi.seanProject.beans.Reponse;
 import fr.epsi.seanProject.beans.Utilisateur;
+import fr.epsi.seanProject.dao.IUtilisateurDao;
+import fr.epsi.seanProject.dao.mockImpl.MockUtilisateurDao;
 
 /**
  * Servlet implementation class CreateUserServlet
@@ -25,7 +28,7 @@ import fr.epsi.seanProject.beans.Utilisateur;
 @WebServlet("/CreateUserServlet")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    IUtilisateurDao utilisateurDao = new MockUtilisateurDao();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -54,6 +57,12 @@ public class CreateUserServlet extends HttpServlet {
 		user.setPassord(request.getParameter("password"));
 		user.setDateCreation(new Date(new java.util.Date().getTime()));
 		user.setAdmin(Boolean.parseBoolean(request.getParameter("admin")));
+		try {
+			utilisateurDao.createUtilisateur(user);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.getRequestDispatcher("CreateUserPage.jsp").forward(request, response);
 	}
 
