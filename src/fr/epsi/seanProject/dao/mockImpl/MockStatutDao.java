@@ -7,12 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.epsi.seanProject.beans.Statut;
 import fr.epsi.seanProject.dao.DBConnection;
 import fr.epsi.seanProject.dao.IStatutDao;
 
 public class MockStatutDao implements IStatutDao {
-
+	private static final Logger Logger = LogManager.getLogger(MockStatutDao.class);
 	private static List<Statut> listOfStatuts;
 	
 	@Override
@@ -39,6 +42,7 @@ public class MockStatutDao implements IStatutDao {
     	Statement con = connection.createStatement();
     	
     	ResultSet rs = con.executeQuery("select * from statut");
+    	Logger.debug(con.toString());
     	while(rs.next()) {
 		
 			Statut statut = new Statut();
@@ -47,7 +51,7 @@ public class MockStatutDao implements IStatutDao {
 			listOfStatuts.add(statut);
     	}
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}
 			
 		return listOfStatuts;

@@ -55,17 +55,18 @@ public class CreatePostServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Blog newBlog = new Blog();
-		newBlog.setTitre(request.getParameter("title" ));
+		newBlog.setTitre(request.getParameter("titre"));
 		newBlog.setDescription(request.getParameter("textarea"));
 		newBlog.setDateCreation(new Date(new java.util.Date().getTime()));
-		Utilisateur createur = new Utilisateur();
-		createur.setEmail("blyat@gmail.com");
+		Utilisateur createur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+	
+		createur.setEmail(createur.getEmail());
 		newBlog.setCreateur(createur);
 		List<Reponse> reps = new ArrayList();
 		newBlog.setListOfReponses(reps);
 		Statut st = new Statut();
-		st.setDescription("Publiée");
 		st.setId(1);
+		st.setDescription("Publié");
 		newBlog.setStatut(st);
 		try {
 			int id = BlogDao.createBlog(newBlog);

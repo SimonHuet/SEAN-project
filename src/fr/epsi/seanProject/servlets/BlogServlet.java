@@ -82,7 +82,9 @@ public class BlogServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if (request.getParameter("delete") != null) {
+		if(request.getParameter("retour") != null) {
+			request.getRequestDispatcher("/ListPostServlet").forward(request, response);
+		}else if (request.getParameter("delete") != null) {
 			HttpSession s = request.getSession();
 			Utilisateur user = (Utilisateur) s.getAttribute("utilisateur");
 			try {

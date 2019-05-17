@@ -59,16 +59,9 @@ public class ConnectServlet extends HttpServlet {
     		request.getRequestDispatcher("ListPostServlet").forward(request, response);
         }
         else {
+        	logger.error("Erreur de login : " + name );
         	response.sendRedirect("Error.jsp");
         }
      
     }
-
-    private Boolean isPasswordValid( String password) {
-    	return (password == "TEST");
-    }
-    private Boolean isNameValid( String name ) {
-    	return (name == "TEST");
-    }
-
 }

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.epsi.seanProject.beans.Blog;
 import fr.epsi.seanProject.beans.Reponse;
 import fr.epsi.seanProject.beans.Statut;
@@ -19,9 +22,10 @@ import fr.epsi.seanProject.dao.DBConnection;
 import fr.epsi.seanProject.dao.IBlogDao;
 import fr.epsi.seanProject.dao.IStatutDao;
 import fr.epsi.seanProject.dao.IUtilisateurDao;
+import fr.epsi.seanProject.listener.StartupListener;
 
 public class MockBlogDao implements IBlogDao {
-
+	private static final Logger Logger = LogManager.getLogger(MockBlogDao.class);
 	private static List<Blog> listOfBlogs;
 	private IUtilisateurDao utilisateurDao = new MockUtilisateurDao();
 	private IStatutDao statutDao = new MockStatutDao();
@@ -71,6 +75,7 @@ public class MockBlogDao implements IBlogDao {
 			con.setDate(5, blog.getDateCreation());
 			con.setDate(6, blog.getDateModification());
 			con.setInt(7, blog.getStatut().getId());
+			Logger.debug(con.toString());
 			con.executeUpdate();
 		}
 		catch(Exception e) {
@@ -92,7 +97,9 @@ public class MockBlogDao implements IBlogDao {
 			con.setDate(5, blog.getDateModification());
 			con.setInt(6, blog.getStatut().getId());
 			con.setInt(7, blog.getId());
+			Logger.debug(con.toString());
 			con.executeUpdate();
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -107,7 +114,9 @@ public class MockBlogDao implements IBlogDao {
 					Connection connection = DBConnection.getConnection();
 					PreparedStatement con = connection.prepareStatement("DELETE from blog where id=?");
 					con.setInt(1, blog.getId());
+					Logger.debug(con.toString());
 					con.executeUpdate();
+					
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -131,7 +140,9 @@ public class MockBlogDao implements IBlogDao {
 			con.setString(2, reponse.getCommentaire());
 			con.setString(3, reponse.getBlogger().getEmail());
 			con.setDate(4, reponse.getPublication());
+			Logger.debug(con.toString());
 			con.executeUpdate();
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -144,6 +155,7 @@ public class MockBlogDao implements IBlogDao {
 		try {
 		Connection connection = DBConnection.getConnection();
 		PreparedStatement st= connection.prepareStatement("SELECT * FROM BLOG");
+		Logger.debug(st.toString());
 		ResultSet rs = st.executeQuery();
 		
     	while(rs.next()) {
@@ -162,6 +174,7 @@ public class MockBlogDao implements IBlogDao {
     		PreparedStatement st2= connection.prepareStatement("SELECT * FROM BLOG_COMMENTAIRES where id=?");
     		st2.setInt(1, blog.getId());
     		ResultSet rs2 = st2.executeQuery();
+    		Logger.debug(st2.toString());
     		while(rs2.next()) {
     			Reponse rep = new Reponse();
     			rep.setBlog(blog);

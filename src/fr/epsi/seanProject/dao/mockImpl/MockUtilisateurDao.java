@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.epsi.seanProject.beans.Utilisateur;
 import fr.epsi.seanProject.dao.DBConnection;
 import fr.epsi.seanProject.dao.IUtilisateurDao;
 
 public class MockUtilisateurDao implements IUtilisateurDao {
-
+	private static final Logger Logger = LogManager.getLogger(MockUtilisateurDao.class);
 	private static List<Utilisateur> listOfUtilisateurs;
 	
 	@Override
@@ -48,6 +51,7 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 			con.setString(4, utilisateur.getPassord());
 			con.setString(5, utilisateur.getAdmin().toString());
 			con.executeUpdate();
+			Logger.debug(con.toString());
 		}
 		else {
 			throw new IllegalArgumentException();
@@ -55,7 +59,7 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 	}
 
 	@Override
-	public void updateUtilisateur(Utilisateur utilisateur) throws SQLException {
+	public void updateUtilisateur(Utilisateur utilisateur , String mail) throws SQLException {
 		
 		Connection connection = DBConnection.getConnection();
     	PreparedStatement st = connection.prepareStatement(
@@ -66,8 +70,9 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 		st.setDate( 3, utilisateur.getDateCreation());
 		st.setString( 4, utilisateur.getPassord() );
 		st.setBoolean( 5, utilisateur.getAdmin() );
-    	st.setString( 6, utilisateur.getEmail() );
+    	st.setString( 6, mail );
 		st.executeUpdate();
+		Logger.debug(st.toString());
 	}
 
 		@Override
@@ -79,6 +84,7 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 						PreparedStatement con = connection.prepareStatement("DELETE from users where email=?");
 						con.setString(1, utilisateur.getEmail());
 						con.executeUpdate();
+						Logger.debug(con.toString());
 					}
 					catch(Exception e) {
 						e.printStackTrace();
@@ -93,7 +99,7 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 			}
 		}
 
-	private List<Utilisateur> getListOfUtilisateur() {
+	public List<Utilisateur> getListOfUtilisateur() {
 		listOfUtilisateurs = new ArrayList<Utilisateur>();
 		
 			try {
@@ -101,6 +107,7 @@ public class MockUtilisateurDao implements IUtilisateurDao {
 	        	Statement con = connection.createStatement();
 	        	
 	        	ResultSet rs = con.executeQuery("select * from users");
+	        	Logger.debug(con.toString());
 	        	while(rs.next()) {
 	        		Utilisateur utilisateur = new Utilisateur();
 	        		utilisateur.setEmail(rs.getString("email"));

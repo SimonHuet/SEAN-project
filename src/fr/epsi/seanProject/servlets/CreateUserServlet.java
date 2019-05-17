@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,6 +53,7 @@ public class CreateUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Utilisateur user = new Utilisateur();
+		if(request.getParameter("confirm_password").equals(request.getParameter("password"))) {
 		user.setNom(request.getParameter("nom"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassord(request.getParameter("password"));
@@ -63,7 +65,12 @@ public class CreateUserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("CreateUserPage.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		session.setAttribute("utilisateur", user);
+		request.getRequestDispatcher("/ListPostServlet").forward(request, response);
+		}else {
+			request.getRequestDispatcher("PasswordError.jsp").forward(request, response);
+		}
 	}
 
 }

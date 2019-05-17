@@ -57,7 +57,9 @@ public class StartupListener implements ServletContextListener{
         Logger.error("Démarrage application");
         IBlogDao blogDao = new MockBlogDao();
         List<Blog> listOfBlogs = blogDao.getBlogs();
-        System.out.println("total blogs=" + listOfBlogs.size());
-        
+        System.out.println("Total de blogs=" + listOfBlogs.size());
+        IUtilisateurDao utilisateurDao = new MockUtilisateurDao();
+        List<Utilisateur> listOfUsers = utilisateurDao.getListOfUtilisateur();
+        Logger.error("Nombre d'utilisateurs : " + listOfUsers.size());
         }
     }
